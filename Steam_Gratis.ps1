@@ -27,35 +27,7 @@ param(
 )
 
 ####################################################################################################################################
-# ===== 2. Redireciona para o Console ou o ISE =====
-if (-not $psISE){
-    Clear-Host
-    Write-Host ""
-
-    Write-Host "Indicamos que o arquivo seja rodado no Powershell ISE, devido a uma melhor qualidade nas animações." -ForegroundColor Cyan
-    Write-Host ""
-    Write-Host "E uma pergunta de sim ou não..."
-    $decisao = Read-Host "Voce pretende... executar o arquivo no Powershell ISE [S/N]?"
-    If ($decisao -eq "N") {
-        Write-Host ""
-        Write-Host "Ok, executando o arquivo no Console PowerShell..." -ForegroundColor Yellow -NoNewline
-        Start-Sleep -Seconds 3
-    } Elseif ($decisao -eq "S") {
-        Write-Host ""
-        Write-Host "Legal!!! Abrindo o PowerShell ISE..."-ForegroundColor Green -NoNewline
-        Start-Sleep -Seconds 3
-        Start-Process powershell_ise.exe -ArgumentList "`"$PSCommandPath`""
-        exit
-    } Else {
-        Write-Host "Caractere Incorreto!" -ForegroundColor Red
-        Start-Sleep -Seconds 3
-        exit
-    }
-}
-
-
-####################################################################################################################################
-# ===== 3. Titulo inicial =====
+# ===== 2. Titulo inicial =====
 Clear-Host
 if (-not $psISE) {("`n" * 2)} else {Write-Host ""}
 if ($PSStyle) { $PSStyle.Progress.View = 'Classic' }
@@ -64,7 +36,7 @@ Write-Host "`n  BUSCANDO JOGOS GRATIS NA STEAM" -ForegroundColor Green
 Write-Host "  $('-' * 30)`n" -ForegroundColor DarkGray
 
 ####################################################################################################################################
-# ===== 4.Infraestrutura =====
+# ===== 3.Infraestrutura =====
 Add-Type -AssemblyName System.Net.Http
 $Chrome = 'C:\Program Files\Google\Chrome\Application\chrome.exe'
 $Versao = if (Test-Path $Chrome) { (Get-Item $Chrome).VersionInfo.ProductVersion } else { '130.0.0.0' }
@@ -74,12 +46,12 @@ $Client = New-Object System.Net.Http.HttpClient -Property @{ Timeout = [TimeSpan
 }.GetEnumerator() | ForEach-Object { [void]$Client.DefaultRequestHeaders.TryAddWithoutValidation($_.Key, $_.Value) }
 
 ####################################################################################################################################
-# ===== 5. Converte \u00e9 (formato JSON) no caractere real =====
+# ===== 4. Converte \u00e9 (formato JSON) no caractere real =====
 $RxUni = [regex]'\\u([0-9a-fA-F]{4})'
 $EvUni = [System.Text.RegularExpressions.MatchEvaluator]{ param($m) [string][char][Convert]::ToInt32($m.Groups[1].Value, 16) }
 
 ####################################################################################################################################
-# ===== 6. Define as funções e a animação =====
+# ===== 5. Define as funções e a animação =====
 
 $Giro = '|', '/', '-', '\'
 $n    = 0
@@ -99,7 +71,7 @@ function Novo($A, $Tipo, $Situacao, $Detalhe = '', $Extra = '', $Disponivel = $t
 }
 
 ####################################################################################################################################
-# ===== 7. Coleta os itens da busca =====
+# ===== 6. Coleta os itens da busca =====
 $PaginasTotais = $PaginasGratis + $PaginasScan
 $PagFeitas     = 0
 
@@ -132,7 +104,7 @@ $Itens = @($Todos | Group-Object Link, Id | ForEach-Object { $_.Group[0] })
 if (-not $Itens) { Write-Host "`n  Nenhum item encontrado." -ForegroundColor Red ; Write-Host ""; return }
 
 ####################################################################################################################################
-# ===== 8. Classifica =====
+# ===== 7. Classifica =====
 function Get-Achado($A, $Html) {
     $Jogar = $Html -match "steam://run/$($A.Id)"
     $Obter = $Html -match 'addToCart\('
@@ -158,13 +130,13 @@ function Get-Achado($A, $Html) {
 $Achados = [System.Collections.Generic.List[object]]::new()
 
 ####################################################################################################################################
-# ===== 9. Define pacotes e bundles (so da lista gratis) =====
+# ===== 8. Define pacotes e bundles (so da lista gratis) =====
 $Itens | Where-Object { $_.Link -ne 'app' -and $_.Fonte -eq 'gratis' } | ForEach-Object {
     $Achados.Add((Novo $_ $(if ($_.Link -eq 'sub') { 'PACOTE' } else { 'BUNDLE' }) 'Gratis em promocao'))
 }
 
 ####################################################################################################################################
-# ===== 10. Define os apps: baixa a pagina de cada um, um lote de cada vez; o proximo lote baixa enquanto o atual e processado =====
+# ===== 9. Define os apps: baixa a pagina de cada um, um lote de cada vez; o proximo lote baixa enquanto o atual e processado =====
 $Apps  = @($Itens | Where-Object { $_.Link -eq 'app' })
 $Total = $Apps.Count
 
@@ -193,7 +165,7 @@ for ($i = 0; $i -lt $Total; $i += $Lote) {
 $Achados = @($Achados | Group-Object { "$($_.Tipo):$($_.Id)" } | ForEach-Object { $_.Group[0] })
 
 ####################################################################################################################################
-# ===== 11. Descobre o tipo real (JOGO / DLC / DEMO) e confere o lancamento =====
+# ===== 10. Descobre o tipo real (JOGO / DLC / DEMO) e confere o lancamento =====
 $NomeTipo = @{ game = 'JOGO'; dlc = 'DLC'; demo = 'DEMO' }
 $Pend     = @($Achados | Where-Object Tipo -eq 'APP')
 $k        = 0
@@ -219,7 +191,7 @@ foreach ($A in $Pend) {
 }
 
 ####################################################################################################################################
-# ===== 12. Separa em grupos =====
+# ===== 11. Separa em grupos =====
 $Disp   = @($Achados | Where-Object Disponivel)
 $Temp   = @($Disp | Where-Object { $_.Tipo -ne 'DLC' -and $_.Situacao -in @('FIM DE SEMANA GRATIS', 'Tempo limitado') })
 $Gratis = @($Disp | Where-Object { $_.Tipo -eq 'JOGO' -and $_.Situacao -like 'Gratuito*' })
@@ -228,13 +200,13 @@ $Mostra = $Temp + $Gratis + $Dlcs
 $Outros = @($Disp | Where-Object { $Mostra -notcontains $_ })
 
 ####################################################################################################################################
-# ===== 13. Se todos terminam na mesma data, ela vai para o titulo =====
+# ===== 12. Se todos terminam na mesma data, ela vai para o titulo =====
 $Datas      = @($Temp | ForEach-Object { ($_.Detalhe -replace '^(Jogue gratuitamente at\S*|Oferta v.lida at\S*|Obtenha antes de)\s*', '') -replace '\u00e0s', 'as' } | Select-Object -Unique)
 $TituloTemp = 'JOGOS DISPONIVEIS PARA BAIXAR TEMPORARIAMENTE'
 if ($Datas.Count -eq 1 -and $Datas[0]) { $TituloTemp += " (ATE $($Datas[0]))".ToUpper() }
 
 ####################################################################################################################################
-# ===== 14. Mostra o resultado =====
+# ===== 13. Mostra o resultado =====
 function Secao($Titulo, $Lista, $Cor, [switch]$Motivo) {
     if (-not $Lista) { return }
     $Linha = '=' * 79
@@ -260,8 +232,10 @@ Secao 'OUTROS (Demos, Pacotes e Bundles)' $Outros Cyan
 
 
 ####################################################################################################################################
-# ===== 15. Se o script for rodado no console tem um tratamento especial para sair =====
+# ===== 14. Se o script for rodado no console tem um tratamento especial para sair =====
 if (-not $psISE) {
-    Write-Host "Pressione Ctrl+C para sair... " -ForegroundColor Gray -NoNewline
-    While ($true) { Start-Sleep -Seconds 1 }
+    Write-Host "................................"
+    Write-Host "...Pressione Ctrl+C para sair... " -ForegroundColor Gray 
+    Write-Host "................................" -NoNewline
+    While ($true) {Start-Sleep -Seconds 1}
 }
