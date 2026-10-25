@@ -22,7 +22,7 @@
 # ===== 1. Define as paginas de busca =====
 param(
     [int]$PaginasGratis = 2,   # paginas da lista "gratis" (50 itens cada)
-    [int]$PaginasScan   = 2,   # paginas de promocoes varridas atras de fins de semana gratis
+    [int]$PaginasScan   = 4,   # paginas de promocoes varridas atras de fins de semana gratis
     [int]$Lote          = 10   # paginas de jogos baixadas ao mesmo tempo
 )
 
