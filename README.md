@@ -143,31 +143,19 @@ O script pode ser aberto no **PowerShell ISE** (pressione **F5**) ou rodado em u
 
 ### 3.3 Exemplo de saída
 
-> Exemplo ilustrativo do formato; os nomes e as datas mudam a cada execução.
+**Carregamento:** barra de progresso do `Write-Progress` e animação de uma linha.
 
-```text
---- ITENS GRATIS AGORA (5 disponiveis) ---
+![Tela de carregamento](imagens/carregando.png)
 
-===============================================================================
-  JOGOS DISPONIVEIS PARA BAIXAR TEMPORARIAMENTE (ATE 19 DE OUT. AS 10:00)  [2]
-===============================================================================
+**Resultado completo:** grupo de jogos temporários e de DLCs.
 
-Ravenswatch
-  Jogue gratuitamente até 19 de out. às 10:00
-  Preco atual: R$37,49
+![Resultado com jogos temporários e DLCs](imagens/resultado.png)
 
-Stranded Deep
-  Jogue gratuitamente até 19 de out. às 10:00
-  Preco atual: R$15,19
+**Console comum:** o resultado termina com o aviso para sair com Ctrl+C.
 
-===============================================================================
-  DLCs  [3]
-===============================================================================
+![Saída no console com DLC e aviso de saída](imagens/dlcs.png)
 
-Squad Weapon Skins - Recon Team Pack
-  Obtenha antes de 25 de out. as 11:00
-  Requer o jogo: Squad
-```
+> Os nomes e as datas mudam a cada execução.
 
 ### 3.4 Estrutura do código
 
