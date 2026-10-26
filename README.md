@@ -11,7 +11,7 @@ Script em PowerShell que lista, direto no terminal, os jogos, DLCs e pacotes que
 
 **Carregamento:** barra de progresso do `Write-Progress` e animação de uma linha.
 
-![Tela de carregamento](imagens/carregando.png)
+![Tela de carregamento](<img width="360" height="210" alt="Image" src="https://github.com/user-attachments/assets/86e645d4-3cff-42d9-8b37-91273557bd38" />)
 
 **Resultado completo:** grupo de jogos temporários e de DLCs.
 
