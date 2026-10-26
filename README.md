@@ -7,6 +7,22 @@ Script em PowerShell que lista, direto no terminal, os jogos, DLCs e pacotes que
 
 ---
 
+### 3.3 Exemplo de saída
+
+**Carregamento:** barra de progresso do `Write-Progress` e animação de uma linha.
+
+![Tela de carregamento](imagens/carregando.png)
+
+**Resultado completo:** grupo de jogos temporários e de DLCs.
+
+![Resultado com jogos temporários e DLCs](imagens/resultado.png)
+
+**Console comum:** o resultado termina com o aviso para sair com Ctrl+C.
+
+![Saída no console com DLC e aviso de saída](imagens/dlcs.png)
+
+> Os nomes e as datas mudam a cada execução.
+
 ## Sumário
 
 1. [Introdução](#1-introdução)
@@ -141,23 +157,8 @@ O script pode ser aberto no **PowerShell ISE** (pressione **F5**) ou rodado em u
 | `-PaginasScan` | `4` | Páginas de promoções varridas atrás de fins de semana grátis (50 itens cada) |
 | `-Lote` | `10` | Quantidade de páginas de jogos baixadas ao mesmo tempo |
 
-### 3.3 Exemplo de saída
 
-**Carregamento:** barra de progresso do `Write-Progress` e animação de uma linha.
-
-![Tela de carregamento](imagens/carregando.png)
-
-**Resultado completo:** grupo de jogos temporários e de DLCs.
-
-![Resultado com jogos temporários e DLCs](imagens/resultado.png)
-
-**Console comum:** o resultado termina com o aviso para sair com Ctrl+C.
-
-![Saída no console com DLC e aviso de saída](imagens/dlcs.png)
-
-> Os nomes e as datas mudam a cada execução.
-
-### 3.4 Estrutura do código
+### 3.3 Estrutura do código
 
 O arquivo é dividido em seções numeradas, na ordem de execução:
 
@@ -179,7 +180,7 @@ O arquivo é dividido em seções numeradas, na ordem de execução:
 
 Uma decisão de desempenho: enquanto um lote de páginas é processado, o **próximo lote já está sendo baixado**, o que reduz a espera entre um número e outro na barra de progresso.
 
-### 3.5 Limitações conhecidas
+### 3.4 Limitações conhecidas
 
 - **Cobertura da varredura:** os fins de semana grátis só são encontrados entre os `-PaginasScan × 50` primeiros itens da lista de promoções, que a Steam ordena por relevância. Em 13/10/2026, a loja brasileira listava 16.330 itens em promoção. Varrer tudo exigiria mais de 16 mil requisições, o que não é prático e pode levar a Steam a recusar pedidos.
 - **Dependência do HTML da loja:** as datas são extraídas de frases em português ("Jogue gratuitamente até", "Obtenha antes de", "Oferta válida até"). Se a Steam mudar o texto ou a estrutura das páginas, a data pode aparecer como "data de termino nao encontrada".
