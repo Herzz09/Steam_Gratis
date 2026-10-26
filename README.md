@@ -91,27 +91,7 @@ flowchart TD
 |----------|------------------|-----------------|
 | **Fim de semana grátis** | A página traz "Jogue gratuitamente até..." | Está na própria frase |
 | **Tempo limitado (100%)** | Preço final zero e desconto de 100%, com "Obtenha antes de..." ou "Oferta válida até..." | Está na própria frase |
-| **Gratuito para jogar** | Preço zero na lista `gratis`, sem promoção | Não se aplica |
-
-Pacotes e bundles gratuitos vêm apenas da lista `gratis` e aparecem no grupo "Outros (Demos, Pacotes e Bundles)".
-
-**Disponibilidade.** Um item só entra no resultado se puder ser baixado:
-
-- fim de semana grátis: precisa do botão **Jogar** na página (`steam://run/<id>`);
-- 100% de desconto: precisa do botão de adicionar à conta (`addToCart(`);
-- itens marcados como "em breve" ou ainda não lançados são descartados;
-
-**Tipo real.** A API `appdetails` informa se o item é jogo, DLC ou demo. Para DLCs, o script mostra também o jogo exigido ("Requer o jogo: ...").
-
-**Grupos exibidos:**
-
-1. **Jogos disponíveis para baixar temporariamente** (fim de semana grátis e 100% de desconto, exceto DLCs);
-2. **Jogos grátis** (*free-to-play* permanente);
-3. **DLCs**;
-4. **Outros** (demos, pacotes e bundles).
-
-Se todos os itens do primeiro grupo terminam na mesma data, ela é colocada no título do grupo.
-
+| **Gratuito para jogar** | Preço zero na lista `gratis`, sem desconto de 100%
 ### 2.2 Ferramentas
 
 | Ferramenta | Uso no projeto |
@@ -205,7 +185,7 @@ Uma decisão de desempenho: enquanto um lote de páginas é processado, o **pró
 - [ ] Suporte a outros idiomas e regiões, parametrizando as frases procuradas e os códigos `cc` e `l`.
 - [ ] Testes automatizados (por exemplo, com [Pester](https://pester.dev)) usando páginas HTML de exemplo.
 - [ ] Tratamento explícito de limite de requisições (*rate limit*) e *log* de erros.
-- [ ] Definir e adicionar uma licença ao repositório.
+- [x] Adicionar a licença MIT ao repositório.
 
 ---
 
