@@ -7,7 +7,7 @@ Script em PowerShell que lista, direto no terminal, os jogos, DLCs e pacotes que
 
 ---
 
-### 3.3 Exemplo de saída
+### Exemplos de saída
 
 **Tela de carregamento:** barra de progresso do `Write-Progress` e animação de uma linha.
 
@@ -19,7 +19,7 @@ Script em PowerShell que lista, direto no terminal, os jogos, DLCs e pacotes que
 
 **Console comum:** o resultado termina com o aviso para sair com Ctrl+C.
 
-![Saída no console com DLC e aviso de saída](imagens/dlcs.png)
+<img width="427" height="232" alt="Image" src="https://github.com/user-attachments/assets/72f1c475-8ee9-4020-8d1e-a0ce60e60c5d" />
 
 > Os nomes e as datas mudam a cada execução.
 
