@@ -10,16 +10,14 @@ Script em PowerShell que lista, direto no terminal, os jogos, DLCs e pacotes que
 ### Exemplos de saída
 
 **1. Tela de carregamento:** barra de progresso do `Write-Progress` e animação de uma linha.
-
 <img width="360" height="210" alt="Image" src="https://github.com/user-attachments/assets/86e645d4-3cff-42d9-8b37-91273557bd38" />
 
-**2. Resultado completo:** grupo de jogos temporários e de DLCs.
-
-![Resultado com jogos temporários e DLCs](imagens/resultado.png)
-
-**3. Console comum:** o resultado termina com o aviso para sair com Ctrl+C.
-
+**2. Console comum:** o resultado termina com o aviso para sair com Ctrl+C.
 <img width="427" height="232" alt="Image" src="https://github.com/user-attachments/assets/72f1c475-8ee9-4020-8d1e-a0ce60e60c5d" />
+
+**3. Resultado completo:** grupo de jogos temporários e de DLCs.
+<img width="1227" height="820" alt="Image" src="https://github.com/user-attachments/assets/a0157225-e40d-4214-9fa4-9e29c344c330" />
+
 
 > Os nomes e as datas mudam a cada execução.
 
