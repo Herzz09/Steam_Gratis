@@ -11,7 +11,7 @@ Script em PowerShell que lista, direto no terminal, os jogos, DLCs e pacotes que
 
 **1. Tela de carregamento:** barra de progresso do `Write-Progress` e animação de uma linha.
 
-<img width="427" height="232" alt="Image" src="https://github.com/user-attachments/assets/86e645d4-3cff-42d9-8b37-91273557bd38" />
+<img width="427" height="250" alt="Image" src="https://github.com/user-attachments/assets/86e645d4-3cff-42d9-8b37-91273557bd38" />
 
 
 **2. Console comum:** o resultado termina com o aviso para sair com Ctrl+C.
