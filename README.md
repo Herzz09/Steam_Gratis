@@ -220,4 +220,9 @@ Uma decisão de desempenho: enquanto um lote de páginas é processado, o **pró
 
 ---
 
+## Licença
+
+Distribuído sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+
 Desenvolvido por **Herzz09**.
