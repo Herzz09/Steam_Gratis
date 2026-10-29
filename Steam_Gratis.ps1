@@ -1,11 +1,7 @@
-﻿# Header:
+# Header:
 # dev: Herzz09
 # data: 13/10/2026
 # nome: Steam_Gratis.ps1
-
-####################################################################################################################################
-# Copyright (c) 2026 Herzz09
-# Licenca MIT - veja o arquivo LICENSE no repositorio
 
 ####################################################################################################################################
 #Requires -Version 5.1
@@ -104,8 +100,15 @@ function Get-Itens($Filtro, $Fonte, $Paginas) {
 $Todos = @(Get-Itens '&maxprice=free&specials=1' 'gratis' $PaginasGratis) + @(Get-Itens '&specials=1' 'scan' $PaginasScan)
 Barra 'Lendo a Steam' $PaginasTotais $PaginasTotais
 
+function Ctrl_C {
+    Write-Host "  ................................"
+    Write-Host "  ...Pressione Ctrl+C para sair... " -ForegroundColor Gray 
+    Write-Host "  ................................" -NoNewline
+    While ($true) {Start-Sleep -Seconds 1}
+}
+
 $Itens = @($Todos | Group-Object Link, Id | ForEach-Object { $_.Group[0] })  
-if (-not $Itens) { Write-Host "`n  Nenhum item encontrado." -ForegroundColor Red ; Write-Host ""; return }
+if (-not $Itens) { Write-Host "`n`n  Nenhum item encontrado." -ForegroundColor Red ; Write-Host "" ; if (-not $psISE) {Ctrl_C} ;  return }
 
 ####################################################################################################################################
 # ===== 7. Classifica =====
@@ -237,9 +240,4 @@ Secao 'OUTROS (Demos, Pacotes e Bundles)' $Outros Cyan
 
 ####################################################################################################################################
 # ===== 14. Se o script for rodado no console tem um tratamento especial para sair =====
-if (-not $psISE) {
-    Write-Host "................................"
-    Write-Host "...Pressione Ctrl+C para sair... " -ForegroundColor Gray 
-    Write-Host "................................" -NoNewline
-    While ($true) {Start-Sleep -Seconds 1}
-}
+if (-not $psISE) {Ctrl_C}
