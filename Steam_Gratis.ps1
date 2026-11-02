@@ -210,7 +210,7 @@ $Outros = @($Disp | Where-Object { $Mostra -notcontains $_ })
 # ===== 12. Se todos terminam na mesma data, ela vai para o titulo =====
 $Datas      = @($Temp | ForEach-Object { ($_.Detalhe -replace '^(Jogue gratuitamente at\S*|Oferta v.lida at\S*|Obtenha antes de)\s*', '') -replace '\u00e0s', 'as' } | Select-Object -Unique)
 $TituloTemp = 'JOGOS DISPONIVEIS PARA BAIXAR'
-if ($Datas.Count -eq 1 -and $Datas[0]) { $TituloTemp += " ( GRATIS ATE $($Datas[0]))".ToUpper() }
+if ($Datas.Count -eq 1 -and $Datas[0]) { $TituloTemp += " (GRATIS ATE $($Datas[0]))".ToUpper() }
 
 ####################################################################################################################################
 # ===== 13. Mostra o resultado =====
