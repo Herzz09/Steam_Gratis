@@ -101,9 +101,9 @@ $Todos = @(Get-Itens '&maxprice=free&specials=1' 'gratis' $PaginasGratis) + @(Ge
 Barra 'Lendo a Steam' $PaginasTotais $PaginasTotais
 
 function Ctrl_C {
-    Write-Host "  ................................"
+    Write-Host "  ................................" -ForegroundColor Gray 
     Write-Host "  ...Pressione Ctrl+C para sair... " -ForegroundColor Gray 
-    Write-Host "  ................................" -NoNewline
+    Write-Host "  ................................" -ForegroundColor Gray  -NoNewline
     While ($true) {Start-Sleep -Seconds 1}
 }
 
