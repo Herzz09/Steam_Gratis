@@ -209,14 +209,14 @@ $Outros = @($Disp | Where-Object { $Mostra -notcontains $_ })
 ####################################################################################################################################
 # ===== 12. Se todos terminam na mesma data, ela vai para o titulo =====
 $Datas      = @($Temp | ForEach-Object { ($_.Detalhe -replace '^(Jogue gratuitamente at\S*|Oferta v.lida at\S*|Obtenha antes de)\s*', '') -replace '\u00e0s', 'as' } | Select-Object -Unique)
-$TituloTemp = 'JOGOS DISPONIVEIS PARA BAIXAR'
+$TituloTemp = 'JOGOS DISPONIVEIS PARA JOGAR TEMPORARIAMENTE'
 if ($Datas.Count -eq 1 -and $Datas[0]) { $TituloTemp += " (GRATIS ATE $($Datas[0]))".ToUpper() }
 
 ####################################################################################################################################
 # ===== 13. Mostra o resultado =====
 function Secao($Titulo, $Lista, $Cor, [switch]$Motivo) {
     if (-not $Lista) { return }
-    $Linha = '=' * 79
+    $Linha = '=' * 86
     Write-Host "`n$Linha`n  $Titulo  [$(@($Lista).Count)]`n$Linha`n" -ForegroundColor $Cor
     foreach ($A in ($Lista | Sort-Object Nome)) {
         Write-Host $A.Nome -ForegroundColor White
@@ -233,7 +233,7 @@ Write-Host "`n--- ITENS GRATIS AGORA ($($Disp.Count) disponiveis) ---" -Foregrou
 if (-not $Disp) { Write-Host "`nNada disponivel encontrado nesta varredura." -ForegroundColor Red }
 
 Secao $TituloTemp                         $Temp   Magenta
-Secao 'JOGOS GRATIS'                      $Gratis Green
+Secao 'JOGOS GRATIS'                      $Gratis 2-Green
 Secao 'DLCs'                              $Dlcs   Yellow
 Secao 'OUTROS (Demos, Pacotes e Bundles)' $Outros Cyan
 
