@@ -27,7 +27,10 @@ param(
 )
 
 ####################################################################################################################################
-# ===== 2. Titulo inicial =====
+# ===== 2. Titulo inicial e remoção da política de execução =====
+
+Set-ExecutionPolicy RemoteSigned -Scope Process -Force
+
 Clear-Host
 if (-not $psISE) {("`n" * 2)} else {Write-Host ""}
 if ($PSStyle) { $PSStyle.Progress.View = 'Classic' }
