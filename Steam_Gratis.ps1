@@ -230,7 +230,7 @@ function Secao($Titulo, $Lista, $Cor, [switch]$Motivo) {
 Write-Progress -Activity 'Buscando itens gratis na Steam' -Completed
 Clear-Host
 Write-Host "`n--- ITENS GRATIS AGORA ($($Disp.Count) disponiveis) ---" -ForegroundColor Green
-if (-not $Disp) { Write-Host "`nNada disponivel encontrado nesta varredura." -ForegroundColor Red }
+if (-not $Disp) { Write-Host "`nNada disponivel encontrado nesta varredura." -ForegroundColor Red ; Write-Host ''}
 
 Secao $TituloTemp                         $Temp   Magenta
 Secao 'JOGOS GRATIS'                      $Gratis 2-Green
