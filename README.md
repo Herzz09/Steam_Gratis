@@ -1,4 +1,4 @@
-# Steam_Gratis.ps1
+# Steam_Day.ps1
 
 Script em PowerShell que lista, direto no terminal, os jogos, DLCs e pacotes que estão **gratuitos na Steam agora**: fins de semana grátis, promoções de 100% de desconto e jogos *free-to-play*, com a data de término de cada oferta.
 
